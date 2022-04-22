@@ -205,6 +205,10 @@ Only a connection profile will be used by Weaver, as we will see later.
 
 To launch a network using containerized components, you will typically use a Docker Compose or Kubernetes configuration file. No modifications are needed to the peers', orderers', and CAs' configurations. Sample instructions are given below for networks launched using Docker Compose; we leave it to the reader to adapt these to their custom launch processes.
 
+### Install the Fabric Interoperation Chaincode
+
+Install the Fabric Interoperation Chaincode in the relevant channel(s), i.e., those that run smart contracts that will be involved in any interoperation mode. This is a Go module that can be fetched from `github.com/hyperledger-labs/weaver-dlt-interoperability/core/network/fabric-interop-cc/contracts/interop`. Following that, you an install it using the appropriate Fabric process: in Fabric v2, you will need to package, install, approve, and commit this module on the selected channels in your network.
+
 #### Launch Relay
 
 You can start a relay within a Docker container using a [pre-built image](https://github.com/hyperledger-labs/weaver-dlt-interoperability/pkgs/container/weaver-relay-server). You just need to customize the container configuration for your Fabric network, which you can do by simply creating a folder (let's call it `relay_config`) and configuring the following files in it:
@@ -216,7 +220,7 @@ You can start a relay within a Docker container using a [pre-built image](https:
   EXTERNAL_NETWORK=<docker-bridge-network>
   DOCKER_REGISTRY=ghcr.io/hyperledger-labs
   DOCKER_IMAGE_NAME=weaver-relay
-  DOCKER_TAG=1.2.1
+  DOCKER_TAG=1.2.4
   ```
   The `PATH_TO_CONFIG` variable should point to the `config.toml` (you can name this whatever you wish) specified below.
 
@@ -289,7 +293,7 @@ You can start a driver within a Docker container using a [pre-built image](https
   INTEROP_CHAINCODE=<interop-chaincode-name>
   EXTERNAL_NETWORK=<docker-bridge-network>
   DOCKER_IMAGE_NAME=weaver-fabric-driver
-  DOCKER_TAG=1.2.1
+  DOCKER_TAG=1.2.4
   DOCKER_REGISTRY=ghcr.io/hyperledger-labs
   ```
   `<path_to_connection_profile>` should point to the path of a connection profile you generated in the "Pre-Configuration" section. A Fabric driver obtains client credentials from one of the organizations in your network, so pick an organization and point to the right connection profile.

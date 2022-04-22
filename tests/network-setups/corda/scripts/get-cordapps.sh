@@ -3,7 +3,7 @@
 directory=$(dirname $0)
 app=${1:-simple}
 local=$2
-weaverVersion="1.2.4-alpha.7"
+weaverVersion="1.2.4-alpha.9"
 
 if [ "simple" = "$app" ]; then
   cordappPath=$directory/../../../../samples/corda/corda-simple-application
@@ -51,9 +51,15 @@ elif [ "house" = "$app" ]; then
         echo "Please Build the fungible house token version $houseTokenAppVersion to use local components."
     fi 
   else
-    cd $cordappPath
-    make build || exit 1
-    cd -
+    file="$directory/../github.properties"
+    if [ -f $file ]; then
+      cp $file $cordappPath/
+      cd $cordappPath
+      make build || exit 1
+      cd -
+    else
+      echo Please copy the github.properties.template file as github.properties and replace placeholders with Github credentials.
+    fi
   fi
 
   echo "Copying Fungible House Token App..."

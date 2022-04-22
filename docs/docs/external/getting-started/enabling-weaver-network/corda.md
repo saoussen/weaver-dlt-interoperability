@@ -199,9 +199,10 @@ Typically, pre-configuration involves:
     }
     ```
 
-* _Copy Interoperation CorDapps_: After bootstrapping the nodes folder, copy the following two CorDapps in `build/nodes/PartyA/cordapps` and `build/nodes/PartyB/cordapps` folders (`PartyA` and `PartyB` node names are for example only):
+* _Install Interoperation CorDapp on Nodes_: After bootstrapping the nodes folder, copy the following two CorDapps in `build/nodes/PartyA/cordapps` and `build/nodes/PartyB/cordapps` folders (`PartyA` and `PartyB` node names are for example only):
     - [com.weaver.corda.app.interop.interop-contracts](https://github.com/hyperledger-labs/weaver-dlt-interoperability/packages/906215)
     - [com.weaver.corda.app.interop.interop-workflows](https://github.com/hyperledger-labs/weaver-dlt-interoperability/packages/906216)
+  _Note_: You can follow any installation process for this CorDapp, but make sure it is installed on all the nodes that maintain the states involved in cross-network operations in their vaults.
 
 ### Startup and Bootstrap Weaver components
 
@@ -218,7 +219,7 @@ You can start a relay within a Docker container using a [pre-built image](https:
   EXTERNAL_NETWORK=<docker-bridge-network>
   DOCKER_REGISTRY=ghcr.io/hyperledger-labs
   DOCKER_IMAGE_NAME=weaver-relay
-  DOCKER_TAG=1.2.1
+  DOCKER_TAG=1.2.4
   ```
   The `PATH_TO_CONFIG` variable should point to the `config.toml` (you can name this whatever you wish) specified below.
 
@@ -289,7 +290,7 @@ You can start a driver within a Docker container using a [pre-built image](https
   DRIVER_RPC_PASSWORD=<driver-rpc-username>
   EXTERNAL_NETWORK=<docker-bridge-network>
   DOCKER_IMAGE_NAME=ghcr.io/hyperledger-labs/weaver-corda-driver
-  DOCKER_TAG=1.2.3
+  DOCKER_TAG=1.2.4-alpha.7
   ```
   The `NETWORK_NAME` is only used as suffix for container and has no other significance.
   
